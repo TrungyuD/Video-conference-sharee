@@ -9,8 +9,17 @@ const io = socket(server);
 const users = {};
 
 const socketToRoom = {};
-
+const roomIds = [];
 io.on('connection', socket => {
+
+    socket.on('create new uuid', uuid => {
+        console.log('uuid', uuid);
+        roomIds.push(uuid);
+        socket.emit("roomIds", roomIds);
+    })
+
+
+
     socket.on("join room", roomID => {
         if (users[roomID]) {
             const length = users[roomID].length;
