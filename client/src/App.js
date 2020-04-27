@@ -21,7 +21,11 @@ function App() {
   const openRoom = () => {
       setStatusButton(!statusButton);
       console.log('roomID', roomID.current.value);
-      
+      connection.open(roomID.current.value, (isRoomOpened, roomid, error) => {
+        if(isRoomOpened === true){
+          showRoomURL
+        }
+      })
   }
   return (
     <div>
