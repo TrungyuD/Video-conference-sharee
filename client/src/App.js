@@ -14,10 +14,11 @@ function App() {
     video:true
   }
   connection.sdpConstraints.mandatory = {
-    offerToReceiveAudio:true
+    OfferToReceiveAudio:true,
+    OfferToReceiveVideo:true
   }
   const openRoom = () => {
-    
+      
   }
   return (
     <div>
@@ -28,8 +29,7 @@ function App() {
           <span id="recording-status"></span>
           <button id="btn-stop-recording" style={{display:"none"}}>Stop Recording</button>
           <br></br>
-
-          <input type="text" id="room-id" value="abcdef" />
+          <input type="text" id="room-id"  value="abcdef" />
           <button id="open-room" onClick={openRoom}>Open Room</button>
           <button id="join-room">Join Room</button>
           <button id="open-or-join-room">Auto Open Or Join Room</button>
