@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 const RTCMultiConnection = require("rtcmulticonnection");
 function App() {
+  const roomID = useRef();
+  const [statusButton, setStatusButton] = useState(false);
+
+
   let connection = new RTCMultiConnection();
   console.log('connection', connection);
-  
   connection.socketURL = '/';
-
   connection.socketMessageEvent = 'video-conference-demo';
-
   connection.session = {
     audio:true,
     video:true
@@ -18,6 +19,8 @@ function App() {
     OfferToReceiveVideo:true
   }
   const openRoom = () => {
+      setStatusButton(!statusButton);
+      console.log('roomID', roomID.current.value);
       
   }
   return (
@@ -29,10 +32,10 @@ function App() {
           <span id="recording-status"></span>
           <button id="btn-stop-recording" style={{display:"none"}}>Stop Recording</button>
           <br></br>
-          <input type="text" id="room-id"  value="abcdef" />
-          <button id="open-room" onClick={openRoom}>Open Room</button>
-          <button id="join-room">Join Room</button>
-          <button id="open-or-join-room">Auto Open Or Join Room</button>
+          <input type="text" id="room-id" disabled={statusButton} ref={roomID} value="abcdef" />
+          <button disabled={statusButton} id="open-room" onClick={openRoom}>Open Room</button>
+          <button disabled={statusButton} id="join-room">Join Room</button>
+          <button disabled={statusButton} id="open-or-join-room">Auto Open Or Join Room</button>
         </div>
 
         <div id="videos-container" style={{margin: "20px 0"}}></div>
