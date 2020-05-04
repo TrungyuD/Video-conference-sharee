@@ -24,16 +24,16 @@ function App() {
   }
   let videosContainer = document.getElementById("videos-container");
   connection.onstream = (event) => {
-    console.log('element', event.userid);
+    console.log('element', event.type, 'id', event.userid, 'length', connection.onstream.length);
     videosContainer.appendChild(event.mediaElement);
   }
   useEffect(()=>{
     let  peerss = connection.peers;
-    
     setPeers(peerss);
+    console.log('connection', connection.onstream.length);
   },[])
-  console.log('connection', connection);
-  console.log('peers',peers);
+  // console.log('connection', connection);
+  // console.log('peers',peers);
   
   return (
     <div>
